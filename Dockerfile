@@ -5,15 +5,17 @@ RUN \
     dumb-init \
     git \
     cgit \
-    lighttpd
+    spawn-fcgi \
+    fcgiwrap \
+    nginx && \
+    mkdir -p /run/nginx
 
-ADD cgit.conf /etc/lighttpd/cgit.conf
-ADD cgitrc /etc/cgitrc
-
-RUN echo 'include "cgit.conf"' >> /etc/lighttpd/lighttpd.conf
+COPY cgitrc /etc/cgitrc
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY start_nginx.sh start_nginx.sh
 
 VOLUME /git
 
 ENTRYPOINT ["dumb-init"]
 
-CMD ["lighttpd", "-D", "-f", "/etc/lighttpd/lighttpd.conf"]
+CMD ["./start_nginx.sh"]

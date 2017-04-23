@@ -1,4 +1,11 @@
-css=/cgit/cgit.css
-logo=/cgit/cgit.png
-scan-path=/var/git/ 
+virtual-root=/
+
+css=/cgit.css
+logo=/cgit.png
+scan-path=/git
 enable-git-config=1
+
+repo.url=test.git
+repo.path=/git/git_test.git
+repo.desc=Test Repo
+repo.owner=test@test.test
